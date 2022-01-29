@@ -12,9 +12,9 @@ ReactDOM.render(
   document.getElementById('root')
 )
 
-App.post('/add', function(req,res){
-  res.send('enviado')
-})
+// App.post('/add', function(req,res){
+//   res.send('enviado')
+// })
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

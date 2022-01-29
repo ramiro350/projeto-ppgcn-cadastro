@@ -1,5 +1,7 @@
 import './Header.css'
-import React from 'react'
+import React, { useState } from 'react'
+import { usehistory} from 'react-router-dom'
+import axios from 'axios'
 import TestaCPF from './validarCPF'
 //import user from '../../user/userCrud'
 
@@ -7,26 +9,65 @@ import TestaCPF from './validarCPF'
 //     var strCPF = document.getElementById('cpf') 
 //     console.log(strCPF)
 // }
-export default props =>
-     <header className='Header d-nome d-sm-flex flex-column'>
+
+const baseUrl = 'http://localhost:3002/users'
+const initialState = {
+    user: {nome: '',nomedamae: '',nomedopai: '',naturalidade: ''},
+    list: []
+}
+
+// const PromotionForm = () => {
+//     const [values, setValues] = useState(initialValue)
+//     const history = usehistory()
+    
+// }
+function onChange(ev) {
+    const {name,value} = ev.target
+    console.log({name,value})
+        // setValues({...values, [nome]: value})
+    }
+    
+
+   function save(){
+        const user = this.state.user
+        const method = user.id ? 'put' : 'post'
+        const url = user.id ? `${baseUrl}/${user.id}` : baseUrl
+        axios[method](url,user)
+            .then(resp => {
+                const list = this.getUpdatedList(resp.data)
+                this.setState({user: initialState.user, list})
+            })
+    }
+
+    function onSubmit(ev) {
+        ev.preventDefault()
+        // axios.post('http://localhost:3001', values)
+        //    .then((response) =>{
+            //        history.push('/')
+            //    })
+        }
+        
+        export default props =>(
+            
+        <header className='Header d-nome d-sm-flex flex-column'>
          {/* <h1 className='mt-3'>
              <i className={`fa fa-${props.icon}`}></i> {props.title}
-         </h1>
-         <p className='lead text-muted'></p> {props.subtitle} */}
-         <form action='/add' method='POST'>
+             </h1>
+            <p className='lead text-muted'></p> {props.subtitle} */}
+         <form action='/add' method='POST' >
              <p><strong>Formulário de Inscrição</strong></p>
          <div className='headerdiv1'>
              <p>Dados Pessoais</p>
              <div className='div2'>
 
              <label >Nome:</label>&nbsp;&nbsp;
-             <input type={Text} name='nome' placeholder='Nome' id='nome' required maxLength={30}></input>&nbsp;&nbsp;
+             <input type={Text} name='nome' placeholder='Nome' id='nome' required maxLength={30} onChange={onChange}></input>&nbsp;&nbsp;
              <label id='nomemae'>Nome da mãe:</label><br/>&nbsp;&nbsp;
-             <input type={Text} name='nomedamae' placeholder='Nome da mãe'></input><br/>&nbsp;&nbsp;
+             <input type={Text} name='nomedamae' placeholder='Nome da mãe' onChange={onChange}></input><br/>&nbsp;&nbsp;
              <label id='nomepai'>Nome do pai:</label><br/>&nbsp;&nbsp;
-             <input type={Text} placeholder='Nome do pai' ></input><br/>&nbsp;&nbsp;
+             <input type={Text} placeholder='Nome do pai' onChange={onChange}></input><br/>&nbsp;&nbsp;
              <label id='naturalidade'>Naturalidade:</label><br/>&nbsp;&nbsp;
-             <input type={Text} placeholder='Naturalidade'></input><br/>&nbsp;&nbsp;
+             <input type={Text} placeholder='Naturalidade' onChange={onChange}></input><br/>&nbsp;&nbsp;
              </div>
              <br/>
              <div className='div3'>
@@ -50,7 +91,7 @@ export default props =>
              <label id='dateexp'>Data de expedição:</label><br/>&nbsp;&nbsp;
              <input type={Date} placeholder='Data de expedição'></input><br/>&nbsp;&nbsp;
              <label >CPF:</label><br/>&nbsp;&nbsp;
-             <input type={Text} placeholder='CPF' id='cpf' required maxLength={11}  ></input><br/>&nbsp;&nbsp;
+             <input type={Text} placeholder='CPF' id='cpf'  maxLength={11}  ></input><br/>&nbsp;&nbsp;
              </div><br/>
 
              <div className='div5'>
@@ -183,10 +224,14 @@ export default props =>
          <div className='headerdiv8'>
              <p>Salvar arquivos</p>
              <div className='div17'>
-                 <button onClick={'salvar'} id='btn' name='btn' type='submit'>Salvar</button><br/>
+                 <button onClick={save} id='btn' name='btn' type='submit'>Salvar</button><br/>
              </div><br/>
          </div>
          </form>
      </header>
+)
+
+
+
 
 

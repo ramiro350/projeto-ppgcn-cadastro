@@ -2,6 +2,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'font-awesome/css/font-awesome.min.css'
 import './App.css'
 import React from 'react'
+import {BrowserRouter} from 'react-router-dom'
+import Routes from '../main/Routes'
 import Logo from '../componentes/templates/Logo'
 import Header from '../componentes/templates/Header'
 import Nav from '../componentes/templates/Nav'
@@ -9,17 +11,17 @@ import Nav from '../componentes/templates/Nav'
 import Footer from '../componentes/templates/Footer'
 
 export default props =>
-
+<BrowserRouter>
     <div className='app' >
-
-        
         <Logo />
-        <Header>
-            <script src='C:\vscode\projeto-ppgcn\tela_de_cadastro\tela-cadastro\validarCPF.js'></script>
-        </Header>
+        <Header />
+        {/* <Routes /> */}
         <Footer />
-        
         {/* <Nav/> */}
         {/* <Home /> */}
-    </div>
+     </div>
+</BrowserRouter>
+
+        
+        
 
