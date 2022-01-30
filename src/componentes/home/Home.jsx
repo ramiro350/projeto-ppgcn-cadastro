@@ -1,10 +1,11 @@
-import React from "react";
-import Main from "../template/Main";
+import React from 'react'
+import Main from '../templates/Main'
 
 export default props =>
-    <Main icon='home' title='inicio' 
-      subtitle='Tela de cadastro'>
-      <div className='display-4'>x</div>
-      <hr/>
-      <p className="mb-0">Sistema para exemplificar o cadastro</p>
+    <Main icon="home" title="Início"
+        subtitle="Segundo Projeto do capítulo de React.">
+        <div className='display-4'>Bem Vindo!</div>
+        <hr />
+        <p className="mb-0">Sistema para exemplificar a construção
+            de um cadastro desenvolvido em React!</p>
     </Main>

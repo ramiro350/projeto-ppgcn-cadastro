@@ -21,7 +21,6 @@ export default props =>
         {/* <Home /> */}
      </div>
 </BrowserRouter>
-
         
         
 

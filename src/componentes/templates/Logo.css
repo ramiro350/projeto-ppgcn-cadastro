@@ -1,20 +1,17 @@
-aside.logo{
+aside.logo {
     background-color: var(--bg-dark);
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
-    
 }
 
-aside.logo img{
+aside.logo img {
     padding: 0px 15px;
     width: 100%;
-    
 }
 
-@media screen and (max-width: 768x) {
-    aside.logo img{
+@media(max-width: 576px) {
+    aside.logo img {
         width: 350px;
     }
 }
