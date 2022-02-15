@@ -13,44 +13,199 @@ import TestaCPF from './validarCPF'
 const baseUrl = 'http://localhost:3004/users'
 const initialValue = {
     nome: '',
-    nomedamae: '',
-    nomedopai: '',
+    nomeMae: '',
+    nomePai: '',
     naturalidade: '',
     uf: '',
     nacionalidade: '',
-    datadenascimento: '',
-    estadocivil: ''
+    dataDeNascimento: '',
+    estadoCivil: '',
+    rg: '',
+    expedidor: '',
+    dataDeExpedicao: '',
+    cpf: '',
+    endereco: '',
+    bairro: '',
+    cep: '',
+    cidade: '',
+    telefoneResidencial: '',
+    telefone: '',
+    email1: '',
+    email2: '',
+    cursoDeGraduacao1: '',
+    instituicaoGrad1: '',
+    conclusaoGrad1: '',
+    cursoDeGraduacao2: '',
+    instituicaoGrad2: '',
+    conclusaoGrad2: '',
+    cursoDeEspecializacao: '',
+    instituicaoEsp: '',
+    conclusaoEsp: '',
+    linhaDePesquisa: '',
+    tipoBolsa1: '',
+    orgaoDeFomento1: '',
+    periodo1: '',
+    tipoBolsa2: '',
+    orgaoDeFomento2: '',
+    periodo2: '',
+    disciplinaMonitoria1: '',
+    departamentoMonit1: '',
+    periodoMonit1: '',
+    disciplinaMonitoria2: '',
+    departamentoMonit2: '',
+    periodoMonit2: '',
+    trabalhara: false,
+    exclusivo: false,
+    concorreraABolsa: false,
+    realizaraSemBolsa: false,
+    // fotoarq: '',
+    // historico: '',
+    // diploma: ''
 }
 
 const PromotionForm = () => {
     const [values, setValues] = useState(initialValue)
+   
     const navigate = useNavigate()
     
     function onChange(ev) {
         const {name,value} = ev.target
-        // console.log({name,value})
+        console.log({name,value})
+        console.log(document.getElementById('cbk1').checked)
+        console.log(document.getElementById('cbk2').checked)
+        console.log(document.getElementById('cbk3').checked)
+        console.log(document.getElementById('cbk4').checked)
         setValues({...values, [name]: value})
     }
-    
-    
-    //    function save(){
-        //         const user = this.state.user
-        //         const method = user.id ? 'put' : 'post'
-        //         const url = user.id ? `${baseUrl}/${user.id}` : baseUrl
-        //         axios[method](url,user)
-        //             .then(resp => {
-            //                 const list = this.getUpdatedList(resp.data)
-            //                 this.setState({user: initialState.user, list})
-            //             })
-            //     }
+
+    function check1(){
+        if(document.getElementById('cbk1').checked){
+            document.getElementById('cbk1').value = true
+        }else{
+            document.getElementById('cbk1').value = false
+        }
+    }
+
+    function check2(){
+        if(document.getElementById('cbk2').checked){
+            document.getElementById('cbk2').value = true
+        }else{
+            document.getElementById('cbk2').value = false
+        }
+    }
+
+    function check3(){
+        if(document.getElementById('cbk3').checked){
+            document.getElementById('cbk3').value = true
+        }else{
+            document.getElementById('cbk3').value = false
+        }
+    }
+
+    function check4(){
+        if(document.getElementById('cbk4').checked){
+            document.getElementById('cbk4').value = true
+        }else{
+            document.getElementById('cbk4').value = false
+        }
+    }
+
             
             function onSubmit(ev) {
                 ev.preventDefault()
-                axios.post('http://localhost:3004/users', values)
-                   .then((response) =>{
-                           navigate('/')
-                       })
+                const formData = new FormData()
+            //    if(document.getElementById('cbk1').checked){
+            //         document.getElementById('cbk1').setValues.trabalhara = true
+            //     }if(document.getElementById('cbk2').checked){
+            //         document.getElementById('cbk2').value = true
+            //     } if(document.getElementById('cbk3').checked){
+            //         document.getElementById('cbk3').value = true
+            //     } if(document.getElementById('cbk4').checked){
+            //         document.getElementById('cbk4').value = true
+            //     }
+                
+                // formData.append('fotoarq', Image)
+                // formData.append('historico', File)
+                // formData.append('diploma', File)
+                // formData.append('file', File)
+                // formData.append('file', File)
+                // formData.append('file', File)
+                
+                
+                // console.log(values)
+                
+                formData.append('dados', JSON.stringify(values))
+                // const config = {
+                //     headers: { 'content-type': 'multipart/form-data' }
+                // }
+                
+                //  axios.post('http://localhost:4000/inscritos', formData)
+                //    .then((response) =>{
+                //            console.log(response)  
+                //            navigate('/')
+                           
+                //        }).catch((err) => {
+                //            if(err.response){
+                //                console.log(err.response)
+                //            }else{
+                //                console.log('tente mais tarde')
+                //            }
+                //        })
+                axios({
+                    method: "post",
+                    url: "http://localhost:4000/inscritos",
+                    data: formData,
+                    headers: { "Content-Type": "multipart/form-data" },
+                  })
+                    .then(function (response) {
+                      //handle success
+                      console.log(response);
+                    })
+                    .catch(function (response) {
+                      //handle error
+                      console.log(response);
+                    });
+                    // window.location.reload()
+                    //    console.log(req)
                 }
+
+                // let cpf = document.getElementById('cpf')
+                // function validarCPF(cpf) {	
+                //     cpf = cpf.replace(/[^\d]+/g,'');	
+                //     if(cpf === '') return false;	
+                //     // Elimina CPFs invalidos conhecidos	
+                //     if (cpf.length !== 11 || 
+                //         cpf === "00000000000" || 
+                //         cpf === "11111111111" || 
+                //         cpf === "22222222222" || 
+                //         cpf === "33333333333" || 
+                //         cpf === "44444444444" || 
+                //         cpf === "55555555555" || 
+                //         cpf === "66666666666" || 
+                //         cpf === "77777777777" || 
+                //         cpf === "88888888888" || 
+                //         cpf === "99999999999")
+                //             return false;		
+                //     // Valida 1o digito	
+                //     var add = 0;	
+                //     for (let i=0; i < 9; i ++)		
+                //         add += parseInt(cpf.charAt(i)) * (10 - i);	
+                //         let rev = 11 - (add % 11);	
+                //         if (rev === 10 || rev === 11)		
+                //             rev = 0;	
+                //         if (rev !== parseInt(cpf.charAt(9)))		
+                //             return false;		
+                //     // Valida 2o digito	
+                //     add = 0;	
+                //     for (let j = 0; j < 10; j ++)		
+                //         add += parseInt(cpf.charAt(j)) * (11 - j);	
+                //     rev = 11 - (add % 11);	
+                //     if (rev === 10 || rev === 11)	
+                //         rev = 0;	
+                //     if (rev !== parseInt(cpf.charAt(10)))
+                //         return false;		
+                //     return true;   
+                // }
                 
                 
                     
@@ -61,102 +216,103 @@ const PromotionForm = () => {
                  <i className={`fa fa-${props.icon}`}></i> {props.title}
                  </h1>
                 <p className='lead text-muted'></p> {props.subtitle} */}
-             <form  onSubmit={onSubmit} >
+             <form  onSubmit={onSubmit} name='fileinfo' >
                  <p><strong>Formulário de Inscrição</strong></p>
              <div className='headerdiv1'>
                  <p>Dados Pessoais</p>
                  <div className='div2'>
     
                  <label >Nome:</label>&nbsp;&nbsp;
-                 <input type={Text} name='nome' placeholder='Nome' id='nome' required maxLength={30} onChange={onChange}></input>&nbsp;&nbsp;
-                 <label >Nome da mãe:</label><br/>&nbsp;&nbsp;
-                 <input type={Text} name='nomedamae' placeholder='Nome da mãe' id='nomedamae' onChange={onChange}></input><br/>&nbsp;&nbsp;
-                 <label id='nomedopai'>Nome do pai:</label><br/>&nbsp;&nbsp;
-                 <input type={Text} placeholder='Nome do pai' onChange={onChange}></input><br/>&nbsp;&nbsp;
-                 <label id='naturalidade'>Naturalidade:</label><br/>&nbsp;&nbsp;
-                 <input type={Text} placeholder='Naturalidade' onChange={onChange}></input><br/>&nbsp;&nbsp;
+                 <input type='text' name='nome' placeholder='Nome' id='nome'  maxLength={30} onChange={onChange} required></input>&nbsp;&nbsp;
+                 <label >Nome da mãe:</label>&nbsp;&nbsp;
+                 <input type='text' name='nomeMae' placeholder='Nome da mãe' id='nomedamae' onChange={onChange} required></input><br/>&nbsp;&nbsp;
+                 <label >Nome do pai:</label><br/>&nbsp;&nbsp;
+                 <input type='text' name='nomePai' placeholder='Nome do pai' id='nomedopai' onChange={onChange} required></input><br/>&nbsp;&nbsp;
+                 <label >Naturalidade:</label><br/>&nbsp;&nbsp;
+                 <input type='text' name='naturalidade' placeholder='Naturalidade' id='naturalidade' onChange={onChange} required></input><br/>&nbsp;&nbsp;
                  </div>
                  <br/>
                  <div className='div3'>
     
-                 <label id='uf'>UF:</label><br/>&nbsp;&nbsp;
-                 <input type={Text} placeholder='UF' onChange={onChange}></input><br/>&nbsp;&nbsp;
-                 <label id='nacionalidade'>Nacionalidade:</label><br/>&nbsp;&nbsp;
-                 <input type={Text} placeholder='Nacionalidade' onChange={onChange}></input><br/>&nbsp;&nbsp;
-                 <label id='datenasc'>Data de nascimento:</label><br/>&nbsp;&nbsp;
-                 <input type={Text} placeholder='dd/MM/yyyy' onChange={onChange}></input ><br/>&nbsp;&nbsp;
-                 <label id='estciv'>Estado Civil:</label><br/>&nbsp;&nbsp;
-                 <input type={Text} placeholder='Estado Civil' onChange={onChange}></input><br/>&nbsp;&nbsp;
+                 <label >UF:</label><br/>&nbsp;&nbsp;
+                 <input type='text' name='uf' placeholder='UF' id='uf' onChange={onChange} required></input><br/>&nbsp;&nbsp;
+                 <label >Nacionalidade:</label><br/>&nbsp;&nbsp;
+                 <input type='text' name='nacionalidade' placeholder='Nacionalidade' id='nacionalidade' onChange={onChange} required></input><br/>&nbsp;&nbsp;
+                 <label >Data de nascimento:</label><br/>&nbsp;&nbsp;
+                 <input type='text' name='dataDeNascimento' placeholder='dd/MM/yyyy' id='datenasc' onChange={onChange}  required></input ><br/>&nbsp;&nbsp;
+                 <label >Estado Civil:</label><br/>&nbsp;&nbsp;
+                 <input type='text' name='estadoCivil' placeholder='Estado Civil' id='estciv' onChange={onChange} required></input><br/>&nbsp;&nbsp;
                  </div>
                  <br/>
                  <div className='div4'>
     
                  <label id='rg'>RG:</label>&nbsp;&nbsp;
-                 <input type={Text} name='RG' placeholder='RG'></input><br/>&nbsp;&nbsp;
+                 <input type='text' name='rg' placeholder='RG' onChange={onChange} required></input><br/>&nbsp;&nbsp;
                  <label id='orgexp'>Orgão Expedidor:</label><br/>&nbsp;&nbsp;
-                 <input type={Text} placeholder='Orgão expedidor'></input><br/>&nbsp;&nbsp;
+                 <input type='text' name='expedidor' placeholder='Orgão expedidor' onChange={onChange} required></input><br/>&nbsp;&nbsp;
                  <label id='dateexp'>Data de expedição:</label><br/>&nbsp;&nbsp;
-                 <input type={Date} placeholder='Data de expedição'></input><br/>&nbsp;&nbsp;
+                 <input type='text' name='dataDeExpedicao' placeholder='Data de expedição' onChange={onChange} required></input><br/>&nbsp;&nbsp;
                  <label >CPF:</label><br/>&nbsp;&nbsp;
-                 <input type={Text} placeholder='CPF' id='cpf'  maxLength={11}  ></input><br/>&nbsp;&nbsp;
+                 <input type='text' name='cpf' placeholder='CPF' id='cpf'  maxLength={11} onChange={onChange}  required></input><br/>&nbsp;&nbsp;
                  </div><br/>
     
                  <div className='div5'>
-                 <label id='endereço'>Endereço:</label>&nbsp;&nbsp;
-                 <input type={Text} name='end' placeholder='Endereço'></input><br/>&nbsp;&nbsp;
+                 <label id='endereco'>Endereço:</label>&nbsp;&nbsp;
+                 <input type='text' name='endereco' placeholder='Endereço' onChange={onChange} required></input><br/>&nbsp;&nbsp;
                  <label id='bairro'>Bairro:</label><br/>&nbsp;&nbsp;
-                 <input type={Text} name='bairro' placeholder='Bairro'></input><br/>&nbsp;&nbsp;
+                 <input type='text' name='bairro' placeholder='Bairro' onChange={onChange} required></input><br/>&nbsp;&nbsp;
                  <label id='cep'>CEP:</label><br/>&nbsp;&nbsp;
-                 <input type={Date} name='cep' placeholder='CEP'></input><br/>&nbsp;&nbsp;
+                 <input type='text' name='cep' placeholder='CEP' onChange={onChange} required></input><br/>&nbsp;&nbsp;
                  <label id='cidade'>Cidade:</label><br/>&nbsp;&nbsp;
-                 <input type={Text} name='cidade' placeholder='Cidade'></input><br/>&nbsp;&nbsp;
+                 <input type='text' name='cidade' placeholder='Cidade' onChange={onChange} required></input><br/>&nbsp;&nbsp;
                  </div><br/>
     
                  <div className='div6'>
                  <label id='telres'>Telefone Residencial:</label>&nbsp;&nbsp;
-                 <input type={Text} name='telres' placeholder='Telefone'></input><br/>&nbsp;&nbsp;
+                 <input type='text' name='telefoneResidencial' placeholder='Telefone' onChange={onChange}></input><br/>&nbsp;&nbsp;
                  <label id='cel'>Celular:</label><br/>&nbsp;&nbsp;
-                 <input type={Text} name='cel' placeholder='Celular'></input><br/>&nbsp;&nbsp;
+                 <input type='text' name='telefone' placeholder='Celular' onChange={onChange} required></input><br/>&nbsp;&nbsp;
                  <label id='em1'>Email 1:</label><br/>&nbsp;&nbsp;
-                 <input type={'email'} name='em1' placeholder='Email 1'></input><br/>&nbsp;&nbsp;
+                 <input type='email' name='email1' placeholder='Email 1' onChange={onChange} required></input><br/>&nbsp;&nbsp;
                  <label id='em2'>Email 2:</label><br/>&nbsp;&nbsp;
-                 <input type={'email'} name='em2' placeholder='Email 2'></input><br/>&nbsp;&nbsp;
+                 <input type='email' name='email2' placeholder='Email 2' onChange={onChange}></input><br/>&nbsp;&nbsp;
                  </div><br/>
              </div>
              <div className='headerdiv2'>
                  <p>Formação Acadêmica</p><br/>
                  <div className='div7'>
                  <label id='curgrad'>Curso de Graduação:</label>&nbsp;&nbsp;
-                 <input type={Text} name='curgrad'></input><br/>&nbsp;&nbsp;
+                 <input type='text' name='cursoDeGraduacao1' onChange={onChange} required></input><br/>&nbsp;&nbsp;
+                 <label id='insgrad'>Instituição:</label>&nbsp;&nbsp;
+                 <input type='text' name='instituicaoGrad1' onChange={onChange} required></input><br/>&nbsp;&nbsp;
                  <label id='anocon1'>Ano de Conclusão:</label>&nbsp;&nbsp;
-                 <input type={Text} name='anocon1'></input><br/>&nbsp;&nbsp;
-                 <label id='curesp'>Curso de Especialização:</label>&nbsp;&nbsp;
-                 <input type={Text} name='curesp'></input><br/>&nbsp;&nbsp;
+                 <input type='text' name='conclusaoGrad1' onChange={onChange} required></input><br/>&nbsp;&nbsp;
                  </div><br/>
                  <div className='div18'>
                  <label id='curgrad2'>Curso de Graduação:</label>&nbsp;&nbsp;
-                 <input type={Text} name='curgrad2'></input><br/>&nbsp;&nbsp;
-                 <label id='anocon3'>Ano de Conclusão:</label>&nbsp;&nbsp;
-                 <input type={Text} name='anocon3'></input><br/>&nbsp;&nbsp;
-                 <label id='curesp2'>Curso de Especialização:</label>&nbsp;&nbsp;
-                 <input type={Text} name='curesp2'></input><br/>&nbsp;&nbsp;
+                 <input type='text' name='cursoDeGraduacao2' onChange={onChange}></input><br/>&nbsp;&nbsp;
+                 <label id='insgrad'>Instituição:</label>&nbsp;&nbsp;
+                 <input type='text' name='instituicaoGrad2' onChange={onChange} required></input><br/>&nbsp;&nbsp;
+                 <label id='anocon1'>Ano de Conclusão:</label>&nbsp;&nbsp;
+                 <input type='text' name='conclusaoGrad2' onChange={onChange} required></input><br/>&nbsp;&nbsp;     
                  </div><br/>
                  <div className='div8'>
-                 <label id='insgrad'>Instituição:</label>&nbsp;&nbsp;
-                 <input type={Text} name='ins'></input><br/>&nbsp;&nbsp;
+                 <label id='curesp'>Curso de Especialização:</label>&nbsp;&nbsp;
+                 <input type='text' name='cursoDeEspecializacao' onChange={onChange}></input><br/>&nbsp;&nbsp;
                  <label id='insesp'>Instituição(Curso de especialização):</label>&nbsp;&nbsp;
-                 <input type={Text} name='insesp'></input><br/>&nbsp;&nbsp;
+                 <input type='text' name='instituicaoEsp' onChange={onChange}></input><br/>&nbsp;&nbsp;
                  <label id='anocon2'>Ano de Conclusão(Curso de especialização):</label>&nbsp;&nbsp;
-                 <input type={Text} name='anocon2'></input><br/>&nbsp;&nbsp;
+                 <input type='text' name='conclusaoEsp' onChange={onChange}></input><br/>&nbsp;&nbsp;
                  </div><br/>
              </div>
              <div className='headerdiv3'>
                  <p>Linha de pesquisa pretendida</p>
                  <div className='div9'>
                      <label id='linpes'>Linha de pesquisa</label>&nbsp;&nbsp;
-                     <select name='linpes' id='linpes'>
-                         <option>Aproveitamento de recursos naturais</option>
-                         <option>Monitoramento de recursos naturais</option>
+                     <select name='linhaDePesquisa' id='linpes' onChange={onChange} required>
+                         <option ></option>
+                         <option name='linhaDePesquisa'>Monitoramento de recursos naturais</option>
+                         <option name='linhaDePesquisa'>Aproveitamento de recursos naturais</option>
                      </select>
                  </div><br/>
              </div>
@@ -164,70 +320,74 @@ const PromotionForm = () => {
                  <p>Bolsas Recebidas</p>
                  <div className='div10'>
                  <label id='tipo1'>Tipo:</label>&nbsp;&nbsp;
-                 <input type={Text} name='tipo1'></input><br/>&nbsp;&nbsp;
+                 <input type='text' name='tipoBolsa1' onChange={onChange}></input><br/>&nbsp;&nbsp;
                  <label id='orgfor1'>Orgão de formento:</label>&nbsp;&nbsp;
-                 <input type={Text} name='orgfor1'></input><br/>&nbsp;&nbsp;
+                 <input type='text' name='orgaoDeFomento1' onChange={onChange}></input><br/>&nbsp;&nbsp;
                  <label id='peri1'>Período:</label>&nbsp;&nbsp;
-                 <input type={Text} name='peri1'></input><br/>&nbsp;&nbsp;
+                 <input type='text' name='periodo1' onChange={onChange}></input><br/>&nbsp;&nbsp;
                  </div><br/>
                  <div className='div11'>
                  <label id='tipo2'>Tipo:</label>&nbsp;&nbsp;
-                 <input type={Text} name='tipo2'></input><br/>&nbsp;&nbsp;
+                 <input type='text' name='tipoBolsa2' onChange={onChange}></input><br/>&nbsp;&nbsp;
                  <label id='orgfor2'>Orgão de formento:</label>&nbsp;&nbsp;
-                 <input type={Text} name='orgfor2'></input><br/>&nbsp;&nbsp;
+                 <input type='text' name='orgaoDeFomento2' onChange={onChange}></input><br/>&nbsp;&nbsp;
                  <label id='peri2'>Período:</label>&nbsp;&nbsp;
-                 <input type={Text} name='peri2'></input><br/>&nbsp;&nbsp;
+                 <input type='text' name='periodo2' onChange={onChange}></input><br/>&nbsp;&nbsp;
                  </div><br/>
              </div>
              <div className='headerdiv5'>
                  <p>Atividade de monitoria</p>
                  <div className='div12'>
                  <label id='disc1'>Disciplina:</label>&nbsp;&nbsp;
-                 <input type={Text} name='disc1'></input><br/>&nbsp;&nbsp;
+                 <input type='text' name='disciplinaMonitoria1' onChange={onChange}></input><br/>&nbsp;&nbsp;
                  <label id='dep'>Departamento:</label>&nbsp;&nbsp;
-                 <input type={Text} name='dep'></input><br/>&nbsp;&nbsp;
+                 <input type='text' name='departamentoMonit1' onChange={onChange}></input><br/>&nbsp;&nbsp;
                  <label id='peri3'>Período:</label>&nbsp;&nbsp;
-                 <input type={Text} name='peri3'></input><br/>&nbsp;&nbsp;
+                 <input type='text' name='periodoMonit1' onChange={onChange}></input><br/>&nbsp;&nbsp;
                  </div><br/>
                  <div className='div13'>
                  <label id='disc2'>Disciplina:</label>&nbsp;&nbsp;
-                 <input type={Text} name='disc2'></input><br/>&nbsp;&nbsp;
+                 <input type='text' name='disciplinaMonitoria2' onChange={onChange}></input><br/>&nbsp;&nbsp;
                  <label id='dep1'>Departamento:</label>&nbsp;&nbsp;
-                 <input type={Text} name='dep2'></input><br/>&nbsp;&nbsp;
+                 <input type='text' name='departamentoMonit2' onChange={onChange}></input><br/>&nbsp;&nbsp;
                  <label id='peri4'>Período:</label>&nbsp;&nbsp;
-                 <input type={Text} name='peri4'></input><br/>&nbsp;&nbsp;
+                 <input type='text' name='periodoMonit2' onChange={onChange}></input><br/>&nbsp;&nbsp;
                  </div><br/>
              </div>
              <div className='headerdiv6'>
                  <p>Outras informações</p>
                  <div className='div14'>
                      <label className='cbk1' for='cbk1'>O candidato manterá vincúlo de trabalho durante o curso ?</label>&nbsp;&nbsp;
-                     <input type={'checkbox'} id='cbk1' name='cbk1'></input><br/>&nbsp;&nbsp;
+                     {/* <input type='hidden' id='cbk1' name='trabalhara' onChange={onChange} value='false'></input> */}
+                     <input type='checkbox' id='cbk1' name='trabalhara' onChange={onChange}  onClick={check1} ></input><br/>&nbsp;&nbsp;
                      <label className='cbk2' for='cbk2'>O candidato pretende realizar o curso com dedicação exclusiva ?</label>&nbsp;&nbsp;
-                     <input type={'checkbox'} id='cbk2' name='cbk2'></input><br/>&nbsp;&nbsp;
+                     {/* <input type='hidden' id='cbk2' name='exclusivo' onChange={onChange} value='false'></input> */}
+                     <input type='checkbox' id='cbk2' name='exclusivo' onChange={onChange} onClick={check2}></input><br/>&nbsp;&nbsp;
                  </div>
                  <div className='div15'>
                  <label className='cbk3' for='cbk3'>O candidato pretende concorrer a bolsa de estudos ?</label>&nbsp;&nbsp;
-                     <input type={'checkbox'} id='cbk3' name='cbk3'></input><br/>&nbsp;&nbsp;
+                     {/* <input type='hidden' id='cbk3' name='concorreraABolsa' onChange={onChange} value='false'></input> */}
+                     <input type='checkbox' id='cbk3' name='concorreraABolsa' onChange={onChange} onClick={check3} ></input><br/>&nbsp;&nbsp;
                      <label className='cbk4' for='cbk4'>O candidato pretende realizar o curso mesmo sem ser comtemplado com bolsa de estudos ?</label>&nbsp;&nbsp;
-                     <input type={'checkbox'} id='cbk4' name='cbk4'></input><br/>&nbsp;&nbsp;
+                     {/* <input type='hidden' id='cbk4' name='realizaraSemBolsa' onChange={onChange} value='false'></input> */}
+                     <input type='checkbox' id='cbk4' name='realizaraSemBolsa' onChange={onChange} onClick={check4}></input><br/>&nbsp;&nbsp;
                  </div>
              </div>
-             <div className='headerdiv7'>
+             {/* <div className='headerdiv7'>
                  <p>Foto</p>
                  <div className='div16'>
-                     <input type={'file'} accept='image/jpeg,image/png'></input><br/>
+                     <input type={'file'} name='fotoarq' accept='.pdf' onChange={onChange} required></input><br/>
                  </div><br/>
              </div>
              <div className='headerdiv9'>
                  <p>Anexos</p>
                  <div className='div19'>
                      <label className='hist'>Histórico Escolar</label>&nbsp;&nbsp;
-                     <input type={'file'} accept='.pdf' placeholder='Histórico Escolar'></input><br/>&nbsp;&nbsp;
+                     <input type='file' name='historico' accept='.pdf' placeholder='Histórico Escolar' onChange={onChange} required></input><br/>&nbsp;&nbsp;
                      <label className='dipgrad'>Diploma de graduação</label>&nbsp;&nbsp;
-                     <input type={'file'} accept='.pdf' placeholder='Diploma de graduação'></input><br/>&nbsp;&nbsp;
+                     <input type='file' name='diploma' accept='.pdf' placeholder='Diploma de graduação' onChange={onChange} required></input><br/>&nbsp;&nbsp;
                  </div>
-             </div>
+             </div> */}
              <div className='headerdiv8'>
                  <p>Salvar arquivos</p>
                  <div className='div17'>
