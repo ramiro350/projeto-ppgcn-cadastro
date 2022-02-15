@@ -114,15 +114,6 @@ const PromotionForm = () => {
             function onSubmit(ev) {
                 ev.preventDefault()
                 const formData = new FormData()
-            //    if(document.getElementById('cbk1').checked){
-            //         document.getElementById('cbk1').setValues.trabalhara = true
-            //     }if(document.getElementById('cbk2').checked){
-            //         document.getElementById('cbk2').value = true
-            //     } if(document.getElementById('cbk3').checked){
-            //         document.getElementById('cbk3').value = true
-            //     } if(document.getElementById('cbk4').checked){
-            //         document.getElementById('cbk4').value = true
-            //     }
                 
                 // formData.append('fotoarq', Image)
                 // formData.append('historico', File)
