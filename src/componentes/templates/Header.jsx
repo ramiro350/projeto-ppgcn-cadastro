@@ -88,7 +88,10 @@ const PromotionForm = () => {
 
     function check2(){
         if(document.getElementById('cbk2').checked){
-            document.getElementById('cbk2').value = true
+        
+
+                document.getElementById('cbk2').value = true
+            
         }else{
             document.getElementById('cbk2').value = false
         }
@@ -110,51 +113,49 @@ const PromotionForm = () => {
         }
     }
 
+    
             
-            function onSubmit(ev) {
+           async function onSubmit(ev) {
                 ev.preventDefault()
                 const formData = new FormData()
-                
-                // formData.append('fotoarq', Image)
-                // formData.append('historico', File)
-                // formData.append('diploma', File)
-                // formData.append('file', File)
-                // formData.append('file', File)
-                // formData.append('file', File)
-                
-                
+                // let temp_State = values
+                // console.log(temp_State)
+                // if(values.trabalhara == 'true'){
+                //     temp_State.trabalhara = true
+                //     setValues({temp_State})
+                // }else{
+                //     temp_State.trabalhara = false
+                //     setValues({temp_State})
+                // }
                 // console.log(values)
                 
                 formData.append('dados', JSON.stringify(values))
+                // formData.append('fotoarq', fileInputElement.files[0])
+                formData.append('file', document.getElementById('fotoarq').value)
+                formData.append('file', document.getElementById('historico').value)
+                formData.append('file', document.getElementById('diploma').value)
+                // formData.append('fotoarq', values.fotoarq)
+                // formData.append('historico', values.historico)
+                // formData.append('diploma', values.diploma)
+                
                 // const config = {
                 //     headers: { 'content-type': 'multipart/form-data' }
                 // }
                 
-                //  axios.post('http://localhost:4000/inscritos', formData)
-                //    .then((response) =>{
-                //            console.log(response)  
-                //            navigate('/')
-                           
-                //        }).catch((err) => {
-                //            if(err.response){
-                //                console.log(err.response)
-                //            }else{
-                //                console.log('tente mais tarde')
-                //            }
-                //        })
-                axios({
+            
+                await axios({
                     method: "post",
-                    url: "http://localhost:4000/inscritos",
+                    url: "http://localhost:4001/inscritos",
                     data: formData,
-                    headers: { "Content-Type": "multipart/form-data" },
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
                   })
                     .then(function (response) {
                       //handle success
                       console.log(response);
                     })
-                    .catch(function (response) {
+                    .catch(err => {
                       //handle error
-                      console.log(response);
+                      alert(err);
                     });
                     // window.location.reload()
                     //    console.log(req)
@@ -364,21 +365,21 @@ const PromotionForm = () => {
                      <input type='checkbox' id='cbk4' name='realizaraSemBolsa' onChange={onChange} onClick={check4}></input><br/>&nbsp;&nbsp;
                  </div>
              </div>
-             {/* <div className='headerdiv7'>
+             <div className='headerdiv7'>
                  <p>Foto</p>
                  <div className='div16'>
-                     <input type={'file'} name='fotoarq' accept='.pdf' onChange={onChange} required></input><br/>
+                     <input type={'file'} id='fotoarq' name='fotoarq' accept='.pdf' onChange={onChange} ></input><br/>
                  </div><br/>
              </div>
              <div className='headerdiv9'>
                  <p>Anexos</p>
                  <div className='div19'>
                      <label className='hist'>Histórico Escolar</label>&nbsp;&nbsp;
-                     <input type='file' name='historico' accept='.pdf' placeholder='Histórico Escolar' onChange={onChange} required></input><br/>&nbsp;&nbsp;
+                     <input type='file' id='historico' name='historico' accept='.pdf' placeholder='Histórico Escolar' onChange={onChange} ></input><br/>&nbsp;&nbsp;
                      <label className='dipgrad'>Diploma de graduação</label>&nbsp;&nbsp;
-                     <input type='file' name='diploma' accept='.pdf' placeholder='Diploma de graduação' onChange={onChange} required></input><br/>&nbsp;&nbsp;
+                     <input type='file' id='diploma' name='diploma' accept='.pdf' placeholder='Diploma de graduação' onChange={onChange} ></input><br/>&nbsp;&nbsp;
                  </div>
-             </div> */}
+             </div>
              <div className='headerdiv8'>
                  <p>Salvar arquivos</p>
                  <div className='div17'>
