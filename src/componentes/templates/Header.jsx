@@ -114,7 +114,9 @@ const PromotionForm = () => {
     }
 
     
-            
+            const [fotoarq, setFotoarq] = useState('')
+            const [historico, setHistorico] = useState('')
+            const [diploma, setDiploma] = useState('')
            async function onSubmit(ev) {
                 ev.preventDefault()
                 const formData = new FormData()
@@ -131,17 +133,12 @@ const PromotionForm = () => {
                 
                 formData.append('dados', JSON.stringify(values))
                 // formData.append('fotoarq', fileInputElement.files[0])
-                formData.append('file', document.getElementById('fotoarq').value)
-                formData.append('file', document.getElementById('historico').value)
-                formData.append('file', document.getElementById('diploma').value)
+                formData.append('file', fotoarq)
+                formData.append('file', historico)
+                formData.append('file', diploma)
                 // formData.append('fotoarq', values.fotoarq)
                 // formData.append('historico', values.historico)
                 // formData.append('diploma', values.diploma)
-                
-                // const config = {
-                //     headers: { 'content-type': 'multipart/form-data' }
-                // }
-                
             
                 await axios({
                     method: "post",
@@ -284,9 +281,9 @@ const PromotionForm = () => {
                  <label id='curgrad2'>Curso de Graduação:</label>&nbsp;&nbsp;
                  <input type='text' name='cursoDeGraduacao2' onChange={onChange}></input><br/>&nbsp;&nbsp;
                  <label id='insgrad'>Instituição:</label>&nbsp;&nbsp;
-                 <input type='text' name='instituicaoGrad2' onChange={onChange} required></input><br/>&nbsp;&nbsp;
+                 <input type='text' name='instituicaoGrad2' onChange={onChange} ></input><br/>&nbsp;&nbsp;
                  <label id='anocon1'>Ano de Conclusão:</label>&nbsp;&nbsp;
-                 <input type='text' name='conclusaoGrad2' onChange={onChange} required></input><br/>&nbsp;&nbsp;     
+                 <input type='text' name='conclusaoGrad2' onChange={onChange} ></input><br/>&nbsp;&nbsp;     
                  </div><br/>
                  <div className='div8'>
                  <label id='curesp'>Curso de Especialização:</label>&nbsp;&nbsp;
@@ -368,16 +365,21 @@ const PromotionForm = () => {
              <div className='headerdiv7'>
                  <p>Foto</p>
                  <div className='div16'>
-                     <input type={'file'} id='fotoarq' name='fotoarq' accept='.pdf' onChange={onChange} ></input><br/>
+                     <input type='file' id='fotoarq' name='fotoarq' accept='.pdf' onChange={e => setFotoarq(e.target.files[0]
+                        )} ></input><br/>
                  </div><br/>
              </div>
              <div className='headerdiv9'>
                  <p>Anexos</p>
                  <div className='div19'>
                      <label className='hist'>Histórico Escolar</label>&nbsp;&nbsp;
-                     <input type='file' id='historico' name='historico' accept='.pdf' placeholder='Histórico Escolar' onChange={onChange} ></input><br/>&nbsp;&nbsp;
+                     <input type='file' id='historico' name='historico' accept='.pdf' placeholder='Histórico Escolar' onChange={e => setHistorico(
+                         e.target.files[0]
+                     )} ></input><br/>&nbsp;&nbsp;
                      <label className='dipgrad'>Diploma de graduação</label>&nbsp;&nbsp;
-                     <input type='file' id='diploma' name='diploma' accept='.pdf' placeholder='Diploma de graduação' onChange={onChange} ></input><br/>&nbsp;&nbsp;
+                     <input type='file' id='diploma' name='diploma' accept='.pdf' placeholder='Diploma de graduação' onChange={e => setDiploma(
+                         e.target.files[0]
+                     )} ></input><br/>&nbsp;&nbsp;
                  </div>
              </div>
              <div className='headerdiv8'>
