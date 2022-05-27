@@ -311,6 +311,19 @@ flex-direction: column;
 justify-content: center;
 }
 
+.div20 {
+
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    }
+
+#btn{
+    background-color: rgb(50,200,100);
+    border-radius: 20px;
+}
+
 
 @media screen and (max-width: 1280px) {
 html{
